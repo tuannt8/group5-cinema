@@ -1,0 +1,9 @@
+source_origin_mm 2.7891876220703125e+01
+detector_origin_mm 4.7165664672851562e+01
+pixel_size_mm 2.5043101310729980e-03
+proj_pixel_rows 1015
+proj_pixel_cols 1015
+proj_num 4601
+vol_voxel_rows 988
+vol_voxel_cols 1015
+vol_voxel_slices 997
