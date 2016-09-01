@@ -3,9 +3,14 @@ clear;
 clc;
 close all;
 
-vol_geom = astra_create_vol_geom(128, 128, 128);
+% Create a simple hollow cube phantom
+load phantom.mat;
+cube = phantom(1:128,1:128,1:128);
+s = size(cube);
 
-angles = linspace2(0, 2*pi, 180);
+vol_geom = astra_create_vol_geom(s(1), s(2), s(3));
+
+angles = linspace2(0, 2*pi, 400);
 
 %proj_geom = astra_create_proj_geom('parallel3d', 1.0, 1.0, 128, 192, angles);
 
@@ -21,17 +26,14 @@ angles = linspace2(0, 2*pi, 180);
 proj_geom = astra_create_proj_geom('cone', ...
                                     1, ...
                                     1, ...
-                                    200, ...
-                                    200, ...
+                                    250, ...
+                                    250, ...
                                     angles, ...
-                                    100, ...
-                                    0);
+                                    300, ...
+                                    60);
 
 
-% Create a simple hollow cube phantom
-cube = zeros(128,128,128);
-cube(17:112,17:112,17:112) = 1;
-cube(33:96,33:96,33:96) = 0;
+
 
 % Create projection data from this
 [proj_id, proj_data] = astra_create_sino3d_cuda(cube, proj_geom, vol_geom);

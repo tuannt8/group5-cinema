@@ -5,7 +5,7 @@ close all;
 
 vol_geom = astra_create_vol_geom(128, 128, 128);
 
-angles = linspace2(0, 2*pi, 180);
+angles = linspace2(0, 2*pi, 300);
 
 %proj_geom = astra_create_proj_geom('parallel3d', 1.0, 1.0, 128, 192, angles);
 
@@ -19,13 +19,13 @@ angles = linspace2(0, 2*pi, 180);
 %                                 source_origin, ...
 %                                 origin_det)
 proj_geom = astra_create_proj_geom('cone', ...
-                                    0.1, ...
-                                    0.1, ...
+                                    1, ...
+                                    1, ...
                                     200, ...
                                     200, ...
                                     angles, ...
-                                    100, ...
-                                    20);
+                                    300, ...
+                                    128);
 
 
 % Create a simple hollow cube phantom
@@ -49,8 +49,6 @@ end
 sinogram = sinogram';
 %%
 %% Parameters to specify
-row_num = 508;
-
 crop_size = 0;
 
 padsize_roi = 0;
@@ -84,6 +82,7 @@ drawnow
 source_origin = proj_geom.DistanceOriginSource;
 detector_origin = proj_geom.DistanceOriginDetector;
 pixel_size = proj_geom.DetectorSpacingX;
+
 %%
 
 % Number of pixels in object N-by-N
