@@ -10,7 +10,7 @@ s = size(cube);
 
 vol_geom = astra_create_vol_geom(s(1), s(2), s(3));
 
-angles = linspace2(0, 2*pi, 200);
+angles = linspace2(0, 2*pi, 360);
 
 %proj_geom = astra_create_proj_geom('parallel3d', 1.0, 1.0, 128, 192, angles);
 
@@ -39,8 +39,9 @@ proj_geom = astra_create_proj_geom('cone', ...
 [proj_id, proj_data] = astra_create_sino3d_cuda(cube, proj_geom, vol_geom);
 
 % Add noise
-sigma = 10;
-proj_data = proj_data + sigma*randn(size(proj_data));
+% sigma = 0.03*max(proj_data(:));
+% proj_data = proj_data + sigma*randn(size(proj_data));
+% astra_mex_data3d('set', proj_id, proj_data);
 
 % Display a single projection image
 figure, imshow(squeeze(proj_data(:,20,:))',[])
